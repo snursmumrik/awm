@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.machineFile org.eventb.core.comment="the abstract memory access issue and observe events are refined to represent loads and stores&#10;(a witness is used in each event so that the parameter name can be more meaningful)" org.eventb.core.configuration="org.eventb.core.fwd" org.eventb.texttools.text_lastmodified="1424079795086" org.eventb.texttools.text_representation="machine AM2&#10;&#10;// the abstract memory access issue and observe events are refined to represent loads and stores&#10;// (a witness is used in each event so that the parameter name can be more meaningful)&#10;&#10;refines AM1 sees AC2&#10;&#10;variables issued observed&#10;&#10;events&#10;  event INITIALISATION&#10;    then&#10;      @act1 issued ≔ ∅&#10;      @act2 observed ≔ ∅&#10;  end&#10;&#10;  event IssueLoad // out of order&#10;  refines Issue&#10;    any l&#10;    where&#10;      @grd1 l ∉ issued // not already issued&#10;      @grd2 l ∈ LOAD&#10;    with @ma ma = l&#10;    then&#10;      @act1 issued ≔ issued ∪ {l} // add to the set of issued memory accesses&#10;  end&#10;&#10;  event IssueStore // out of order&#10;  refines Issue&#10;    any s&#10;    where&#10;      @grd1 s ∉ issued // not already issued&#10;      @grd2 s ∈ STORE&#10;    with @ma ma = s&#10;    then&#10;      @act1 issued ≔ issued ∪ {s} // add to the set of issued memory accesses&#10;  end&#10;&#10;  event ObserveLoad refines Observe&#10;    any l&#10;    where&#10;      @grd1 l ∈ issued   // issued&#10;      @grd2 l ∈ LOAD&#10;    with @ma ma = l&#10;    then&#10;      @act1 observed ≔ observed ∪ {l} // add to the set of observed memory accesses&#10;  end&#10;&#10;  event ObserveStore refines Observe&#10;    any s&#10;    where&#10;      @grd1 s ∈ issued   // issued&#10;      @grd2 s ∈ STORE&#10;    with @ma ma = s&#10;    then&#10;      @act1 observed ≔ observed ∪ {s} // add to the set of observed memory accesses&#10;  end&#10;end&#10;" version="5">
+<org.eventb.core.refinesMachine name="_2RCxcLW3EeSa0vHX1GfqtA" org.eventb.core.target="AM1"/>
+<org.eventb.core.seesContext name="_2RCxcbW3EeSa0vHX1GfqtA" org.eventb.core.target="AC2"/>
+<org.eventb.core.variable name="(" org.eventb.core.identifier="issued"/>
+<org.eventb.core.variable name="_w4qjgLBREeSftfcqDYm3Dx" org.eventb.core.identifier="observed"/>
+<org.eventb.core.event name="_w4qjgLBREeSftfcqDYm3Dy" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="INITIALISATION">
+<org.eventb.core.action name="'" org.eventb.core.assignment="issued ≔ ∅" org.eventb.core.label="act1"/>
+<org.eventb.core.action name="(" org.eventb.core.assignment="observed ≔ ∅" org.eventb.core.label="act2"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="_5G8aQLBWEeSftfcqDYm3Dw" org.eventb.core.comment="out of order" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="IssueLoad">
+<org.eventb.core.refinesEvent name="_2RD_kLW3EeSa0vHX1GfqtA" org.eventb.core.target="Issue"/>
+<org.eventb.core.parameter name="_jcv6cbEhEeSNbfxw2p-xdg" org.eventb.core.identifier="l"/>
+<org.eventb.core.guard name="_5G8aQ7BWEeSftfcqDYm3Dw" org.eventb.core.comment="not already issued" org.eventb.core.label="grd1" org.eventb.core.predicate="l ∉ issued"/>
+<org.eventb.core.guard name="_5G9BULBWEeSftfcqDYm3Dw" org.eventb.core.label="grd2" org.eventb.core.predicate="l ∈ LOAD"/>
+<org.eventb.core.witness name="_eeWmcLEkEeSNbfxw2p-xdg" org.eventb.core.label="ma" org.eventb.core.predicate="ma = l"/>
+<org.eventb.core.action name="_5G9BUbBWEeSftfcqDYm3Dw" org.eventb.core.assignment="issued ≔ issued ∪ {l}" org.eventb.core.comment="add to the set of issued memory accesses" org.eventb.core.label="act1"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="_5G9BUrBWEeSftfcqDYm3Dw" org.eventb.core.comment="out of order" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="IssueStore">
+<org.eventb.core.refinesEvent name="_2REmoLW3EeSa0vHX1GfqtA" org.eventb.core.target="Issue"/>
+<org.eventb.core.parameter name="_jcxvoLEhEeSNbfxw2p-xdg" org.eventb.core.identifier="s"/>
+<org.eventb.core.guard name="_5G9oYrBWEeSftfcqDYm3Dw" org.eventb.core.comment="not already issued" org.eventb.core.label="grd1" org.eventb.core.predicate="s ∉ issued"/>
+<org.eventb.core.guard name="_5G9oY7BWEeSftfcqDYm3Dw" org.eventb.core.label="grd2" org.eventb.core.predicate="s ∈ STORE"/>
+<org.eventb.core.witness name="_SQyygbEmEeSNbfxw2p-xdg" org.eventb.core.label="ma" org.eventb.core.predicate="ma = s"/>
+<org.eventb.core.action name="_5G9oZLBWEeSftfcqDYm3Dw" org.eventb.core.assignment="issued ≔ issued ∪ {s}" org.eventb.core.comment="add to the set of issued memory accesses" org.eventb.core.label="act1"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="_F9bkgLBXEeSftfcqDYm3Dw" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="ObserveLoad">
+<org.eventb.core.refinesEvent name="_2RFNsLW3EeSa0vHX1GfqtA" org.eventb.core.target="Observe"/>
+<org.eventb.core.parameter name="_jcy9wbEhEeSNbfxw2p-xdg" org.eventb.core.identifier="l"/>
+<org.eventb.core.guard name="_F9cLkbBXEeSftfcqDYm3Dw" org.eventb.core.comment="issued" org.eventb.core.label="grd1" org.eventb.core.predicate="l ∈ issued"/>
+<org.eventb.core.guard name="_F9cLkrBXEeSftfcqDYm3Dw" org.eventb.core.label="grd2" org.eventb.core.predicate="l ∈ LOAD"/>
+<org.eventb.core.witness name="_cslb8bEmEeSNbfxw2p-xdg" org.eventb.core.label="ma" org.eventb.core.predicate="ma = l"/>
+<org.eventb.core.action name="_F9cyoLBXEeSftfcqDYm3Dw" org.eventb.core.assignment="observed ≔ observed ∪ {l}" org.eventb.core.comment="add to the set of observed memory accesses" org.eventb.core.label="act1"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="_F9cyobBXEeSftfcqDYm3Dw" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="ObserveStore">
+<org.eventb.core.refinesEvent name="_2RF0wLW3EeSa0vHX1GfqtA" org.eventb.core.target="Observe"/>
+<org.eventb.core.parameter name="_jc0L4bEhEeSNbfxw2p-xdg" org.eventb.core.identifier="s"/>
+<org.eventb.core.guard name="_F9cypLBXEeSftfcqDYm3Dw" org.eventb.core.comment="issued" org.eventb.core.label="grd1" org.eventb.core.predicate="s ∈ issued"/>
+<org.eventb.core.guard name="_F9dZsLBXEeSftfcqDYm3Dw" org.eventb.core.label="grd2" org.eventb.core.predicate="s ∈ STORE"/>
+<org.eventb.core.witness name="_csmDALEmEeSNbfxw2p-xdg" org.eventb.core.label="ma" org.eventb.core.predicate="ma = s"/>
+<org.eventb.core.action name="_F9dZsrBXEeSftfcqDYm3Dw" org.eventb.core.assignment="observed ≔ observed ∪ {s}" org.eventb.core.comment="add to the set of observed memory accesses" org.eventb.core.label="act1"/>
+</org.eventb.core.event>
+</org.eventb.core.machineFile>

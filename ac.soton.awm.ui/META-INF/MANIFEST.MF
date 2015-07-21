@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: AWM UI
+Bundle-Vendor: University of Southampton
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: ac.soton.awm.ui; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: ac.soton.awm;visibility:=reexport,
+ org.eclipse.xtext.ui,
+ org.eclipse.ui.editors;bundle-version="3.5.0",
+ org.eclipse.ui.ide;bundle-version="3.5.0",
+ org.eclipse.xtext.ui.shared,
+ org.eclipse.ui,
+ org.eclipse.xtext.builder,
+ org.eclipse.xtext.xbase.lib,
+ org.antlr.runtime,
+ org.eclipse.xtext.common.types.ui,
+ org.eclipse.xtext.ui.codetemplates.ui,
+ org.eclipse.compare
+Import-Package: org.apache.log4j
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: ac.soton.awm.ui.quickfix,
+ ac.soton.awm.ui.contentassist,
+ ac.soton.awm.ui.contentassist.antlr,
+ ac.soton.awm.ui.internal
+Bundle-Activator: ac.soton.awm.ui.internal.AWMActivator

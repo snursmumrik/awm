@@ -1,0 +1,79 @@
+grammar ac.soton.awm.AWM with org.eclipse.xtext.common.Terminals
+
+generate aWM "http://www.soton.ac/awm/AWM"
+
+Model:
+	(processes += Process)*
+	(outcomes += Outcome)*;
+	
+Process:
+	name=PROC ':' 
+	(instructions += Instruction)*;
+
+Instruction:
+	(Load | Store | DLoad | DStore| Wait | Fence) COMMENT?;
+	
+Load:
+	'ld' register = Register',' address = ADDR;
+	
+Store:
+	'st' value = INT',' address = ADDR;
+	
+DLoad:
+	'd_ld' register = Register',' address = ADDR;
+
+DStore:
+	'd_st' value = INT',' address = ADDR;
+
+Wait:
+	'wait' register = Register',' address = ADDR',' value = INT;
+
+Fence:
+	{Fence}'fence';
+	
+Register: name=REG;
+	
+Outcome:
+	'outcome:' State COMMENT?;
+	
+State:
+	Implication;
+	
+Implication returns State:
+	Disjunction({Binary.left=current} op=IMPLY right=Implication)?;
+	
+Disjunction returns State:
+	Conjunction({Binary.left=current} op=OR right=Disjunction)?;
+
+Conjunction returns State:
+	Negation({Binary.left=current} op=AND right=Conjunction)?;
+
+Negation returns State:
+	NOT Negated  
+	| Primary;  
+
+Negated returns State:
+	{Not}not= Primary;
+
+Primary returns State:
+	'(' State ')' | RegState;
+
+RegState:
+	register = [Register|RQN] '=' value = INT;
+
+RQN: PROC'.'REG;
+
+terminal IMPLY: '=>';
+terminal OR: 'or';
+terminal AND: 'and';
+terminal NOT: 'not';
+	
+terminal PROC: ('P'|'p')INT;
+
+terminal REG: ('R'|'r')INT;
+
+terminal ADDR: ('A'|'a')INT;
+
+terminal COMMENT:
+  ';' !('\n'|'\r')* ('\r'? '\n')?;
+	

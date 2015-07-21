@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="toolbar:org.eclipse.ui.main.toolbar">
+         <toolbar
+               id="ac.soton.awm.generator.toolbar"
+               label="Event-B Generator Toolbar">
+            <command
+                  commandId="ac.soton.awm.generator.GenerateCommand"
+                  icon="icons/c2b.png"
+                  style="push">
+               <visibleWhen
+                     checkEnabled="false">
+                  <with
+                        variable="activePartId">
+                     <equals
+                           value="ac.soton.awm.AWM">
+                     </equals>
+                  </with>
+               </visibleWhen>
+            </command>
+         </toolbar>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="ac.soton.awm.generator.GenerateCommand"
+            commandId="ac.soton.awm.generator.GenerateCommand">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="ac.soton.awm.generator.GenerateCommand"
+            name="Generate Event-B">
+      </command>
+   </extension>
+</plugin>

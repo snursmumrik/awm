@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.contextFile org.eventb.core.configuration="org.eventb.core.fwd" org.eventb.texttools.text_lastmodified="1426593872436" org.eventb.texttools.text_representation="context AC2 extends AC1&#10;&#10;constants LOAD STORE&#10;&#10;axioms&#10;  @axm1 LOAD ⊆ MEMACCESS  // load memory access&#10;  @axm2 STORE ⊆ MEMACCESS // store memory access&#10;  @axm3 partition(MEMACCESS, STORE, LOAD)&#10;  //@axm4 finite(LOAD)  // axioms 4 - 7 added to assist ProB&#10;  //@axm5 card(LOAD) ≥ 4&#10;  //@axm6 finite(STORE)&#10;  //@axm7 card(STORE) ≥ 4&#10;&#10;end&#10;" version="3">
+<org.eventb.core.extendsContext name="_Y8xjEMyVEeS35eQk3gU39A" org.eventb.core.target="AC1"/>
+<org.eventb.core.constant name="_7Wt58bBVEeSftfcqDYm3Dw" org.eventb.core.identifier="LOAD"/>
+<org.eventb.core.constant name="_7Wt58rBVEeSftfcqDYm3Dw" org.eventb.core.identifier="STORE"/>
+<org.eventb.core.axiom name="_7WuhALBVEeSftfcqDYm3Dw" org.eventb.core.comment="load memory access" org.eventb.core.label="axm1" org.eventb.core.predicate="LOAD ⊆ MEMACCESS"/>
+<org.eventb.core.axiom name="_7WuhAbBVEeSftfcqDYm3Dw" org.eventb.core.comment="store memory access" org.eventb.core.label="axm2" org.eventb.core.predicate="STORE ⊆ MEMACCESS"/>
+<org.eventb.core.axiom name="_7WuhArBVEeSftfcqDYm3Dw" org.eventb.core.comment="@axm4 finite(LOAD)  // axioms 4 - 7 added to assist ProB&#10;@axm5 card(LOAD) ≥ 4&#10;@axm6 finite(STORE)&#10;@axm7 card(STORE) ≥ 4" org.eventb.core.label="axm3" org.eventb.core.predicate="partition(MEMACCESS, STORE, LOAD)"/>
+</org.eventb.core.contextFile>

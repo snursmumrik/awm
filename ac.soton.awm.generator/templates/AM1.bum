@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.machineFile org.eventb.core.comment="February 2015&#10;ARM memory model&#10;memory accesses are issued and observed by multiple masters" org.eventb.core.configuration="org.eventb.core.fwd" org.eventb.texttools.text_lastmodified="1426598259942" org.eventb.texttools.text_representation="machine AM1&#10;&#10;// February 2015&#10;// ARM memory model&#10;// memory accesses are issued and observed by multiple masters&#10;&#10;sees AC1&#10;&#10;&#10;variables issued observed&#10;&#10;invariants&#10;  @inv1 issued ⊆ MEMACCESS  // issued memory accesses&#10;  @inv2 observed ⊆ issued  // observed memory accesses (must already have been issued)&#10;&#10;events&#10;  event INITIALISATION&#10;    then&#10;      @act1 issued ≔ ∅&#10;      @act2 observed ≔ ∅&#10;  end&#10;&#10;  event Issue  // out of order&#10;    any ma&#10;    where&#10;      @grd1 ma ∉ issued // not already issued&#10;      @grd2 ma ∈ MEMACCESS&#10;    then&#10;      @act1 issued ≔ issued ∪ {ma} // add to the set of issued memory accesses&#10;  end&#10;&#10;  event Observe&#10;    any ma&#10;    where&#10;      @grd1 ma ∈ issued  // issued&#10;    then&#10;      @act1 observed ≔ observed ∪ {ma} // add to the set of observed memory accesses&#10;  end&#10;end&#10;" version="5">
+<org.eventb.core.seesContext name="_mvXksMyfEeS35eQk3gU39A" org.eventb.core.target="AC1"/>
+<org.eventb.core.variable name="(" org.eventb.core.identifier="issued"/>
+<org.eventb.core.variable name="_w4qjgLBREeSftfcqDYm3Dx" org.eventb.core.identifier="observed"/>
+<org.eventb.core.invariant name=")" org.eventb.core.comment="issued memory accesses" org.eventb.core.label="inv1" org.eventb.core.predicate="issued ⊆ MEMACCESS"/>
+<org.eventb.core.invariant name="_w4qjgLBREeSftfcqDYm3Dy" org.eventb.core.comment="observed memory accesses (must already have been issued)" org.eventb.core.label="inv2" org.eventb.core.predicate="observed ⊆ issued"/>
+<org.eventb.core.event name="'" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="INITIALISATION">
+<org.eventb.core.action name="'" org.eventb.core.assignment="issued ≔ ∅" org.eventb.core.label="act1"/>
+<org.eventb.core.action name="(" org.eventb.core.assignment="observed ≔ ∅" org.eventb.core.label="act2"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="_w4qjgLBREeSftfcqDYm3Dz" org.eventb.core.comment="out of order" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="Issue">
+<org.eventb.core.parameter name="_OVXRALEhEeSNbfxw2p-xdg" org.eventb.core.identifier="ma"/>
+<org.eventb.core.guard name="(" org.eventb.core.comment="not already issued" org.eventb.core.label="grd1" org.eventb.core.predicate="ma ∉ issued"/>
+<org.eventb.core.guard name="__rztoLW1EeSa0vHX1GfqtA" org.eventb.core.label="grd2" org.eventb.core.predicate="ma ∈ MEMACCESS"/>
+<org.eventb.core.action name=")" org.eventb.core.assignment="issued ≔ issued ∪ {ma}" org.eventb.core.comment="add to the set of issued memory accesses" org.eventb.core.label="act1"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="_w4qjgLBREeSftfcqDYm3D{" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="Observe">
+<org.eventb.core.parameter name="_OVYfILEhEeSNbfxw2p-xdg" org.eventb.core.identifier="ma"/>
+<org.eventb.core.guard name="(" org.eventb.core.comment="issued" org.eventb.core.label="grd1" org.eventb.core.predicate="ma ∈ issued"/>
+<org.eventb.core.action name="+" org.eventb.core.assignment="observed ≔ observed ∪ {ma}" org.eventb.core.comment="add to the set of observed memory accesses" org.eventb.core.label="act1"/>
+</org.eventb.core.event>
+</org.eventb.core.machineFile>

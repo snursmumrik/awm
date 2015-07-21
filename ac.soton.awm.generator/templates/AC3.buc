@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.contextFile org.eventb.core.configuration="org.eventb.core.fwd" org.eventb.texttools.text_lastmodified="1424687094974" org.eventb.texttools.text_representation="context AC3 extends AC2&#10;&#10;sets ADDR VALUE&#10;&#10;constants address value V0 V1&#10;&#10;axioms&#10;  @axm1 address ∈ MEMACCESS → ADDR  // each memory access has an address&#10;  @axm2 value ∈ STORE → VALUE       // each store has a value&#10;  @axm3 V0 ∈ VALUE&#10;  @axm4 V1 ∈ VALUE&#10;  @axm5 V0 ≠ V1&#10;end&#10;" version="3">
+<org.eventb.core.extendsContext name="_092RsLs9EeSbduHSoMvCew" org.eventb.core.target="AC2"/>
+<org.eventb.core.carrierSet name="_gvvXIbBcEeS2YI9ZOZw9XQ" org.eventb.core.identifier="ADDR"/>
+<org.eventb.core.carrierSet name="_gvvXIrBcEeS2YI9ZOZw9XQ" org.eventb.core.identifier="VALUE"/>
+<org.eventb.core.constant name="_gvvXI7BcEeS2YI9ZOZw9XQ" org.eventb.core.identifier="address"/>
+<org.eventb.core.constant name="_gvvXJLBcEeS2YI9ZOZw9XQ" org.eventb.core.identifier="value"/>
+<org.eventb.core.constant name="_0924wLs9EeSbduHSoMvCew" org.eventb.core.identifier="V0"/>
+<org.eventb.core.constant name="_0924wbs9EeSbduHSoMvCew" org.eventb.core.identifier="V1"/>
+<org.eventb.core.axiom name="_gvv-MLBcEeS2YI9ZOZw9XQ" org.eventb.core.comment="each memory access has an address" org.eventb.core.label="axm1" org.eventb.core.predicate="address ∈ MEMACCESS → ADDR"/>
+<org.eventb.core.axiom name="_gvv-MbBcEeS2YI9ZOZw9XQ" org.eventb.core.comment="each store has a value" org.eventb.core.label="axm2" org.eventb.core.predicate="value ∈ STORE → VALUE"/>
+<org.eventb.core.axiom name="_093f0Ls9EeSbduHSoMvCew" org.eventb.core.label="axm3" org.eventb.core.predicate="V0 ∈ VALUE"/>
+<org.eventb.core.axiom name="_093f0bs9EeSbduHSoMvCew" org.eventb.core.label="axm4" org.eventb.core.predicate="V1 ∈ VALUE"/>
+<org.eventb.core.axiom name="_093f0rs9EeSbduHSoMvCew" org.eventb.core.label="axm5" org.eventb.core.predicate="V0 ≠ V1"/>
+</org.eventb.core.contextFile>

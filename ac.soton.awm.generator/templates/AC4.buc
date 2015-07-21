@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.contextFile org.eventb.core.configuration="org.eventb.core.fwd" org.eventb.texttools.text_lastmodified="1426593946159" org.eventb.texttools.text_representation="context AC4 extends AC3&#10;&#10;constants DMB  // Data Memory Barrier&#10;&#10;axioms&#10;  @axm1 DMB ⊆ TRN&#10;  @axm2 partition(TRN, MEMACCESS, DMB)&#10;  //@amx3 finite(DMB)       // axioms 3,4 added to assist ProB&#10;  //@axm4 card(DMB) ≥ 2&#10;end&#10;" version="3">
+<org.eventb.core.extendsContext name="_j7zccMyVEeS35eQk3gU39A" org.eventb.core.target="AC3"/>
+<org.eventb.core.constant name="_TgCTMbEuEeSNbfxw2p-xdg" org.eventb.core.comment="Data Memory Barrier" org.eventb.core.identifier="DMB"/>
+<org.eventb.core.axiom name="_uQqGk7DtEeSDLL1FFCt7mQ" org.eventb.core.label="axm1" org.eventb.core.predicate="DMB ⊆ TRN"/>
+<org.eventb.core.axiom name="_TgCTMrEuEeSNbfxw2p-xdg" org.eventb.core.comment="@amx3 finite(DMB)       // axioms 3,4 added to assist ProB&#10;@axm4 card(DMB) ≥ 2" org.eventb.core.label="axm2" org.eventb.core.predicate="partition(TRN, MEMACCESS, DMB)"/>
+</org.eventb.core.contextFile>

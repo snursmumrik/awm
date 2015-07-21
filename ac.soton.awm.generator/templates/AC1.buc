@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.contextFile org.eventb.core.configuration="org.eventb.core.fwd" org.eventb.texttools.text_lastmodified="1423580735833" org.eventb.texttools.text_representation="context AC1&#10;&#10;sets TRN MASTER // transactions are issued by one of a number of MASTERS&#10;&#10;constants MEMACCESS issuer&#10;&#10;axioms&#10;  @axm1 MEMACCESS ⊆ TRN  // memory accesses&#10;  @axm2 issuer ∈ TRN → MASTER // the MASTER (issuer) is associated with each transaction&#10;end&#10;" version="3">
+<org.eventb.core.carrierSet name="_4mlQYbEgEeSNbfxw2p-xdg" org.eventb.core.identifier="TRN"/>
+<org.eventb.core.carrierSet name="_pocmkLBDEeSftfcqDYm3Dw" org.eventb.core.comment="transactions are issued by one of a number of MASTERS" org.eventb.core.identifier="MASTER"/>
+<org.eventb.core.constant name="_4mmegLEgEeSNbfxw2p-xdg" org.eventb.core.identifier="MEMACCESS"/>
+<org.eventb.core.constant name="_4m1cILEtEeSNbfxw2p-xdg" org.eventb.core.identifier="issuer"/>
+<org.eventb.core.axiom name="_podNobBDEeSftfcqDYm3Dw" org.eventb.core.comment="memory accesses" org.eventb.core.label="axm1" org.eventb.core.predicate="MEMACCESS ⊆ TRN"/>
+<org.eventb.core.axiom name="_4mnsoLEgEeSNbfxw2p-xdg" org.eventb.core.comment="the MASTER (issuer) is associated with each transaction" org.eventb.core.label="axm2" org.eventb.core.predicate="issuer ∈ TRN → MASTER"/>
+</org.eventb.core.contextFile>

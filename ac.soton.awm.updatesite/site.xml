@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/ac.soton.awm.sdk_1.0.0.201507211023.jar" id="ac.soton.awm.sdk" version="1.0.0.201507211023"/>
+</site>

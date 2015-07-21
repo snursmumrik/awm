@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.machineFile org.eventb.core.comment="In this refinement we introduce the notion of a master-specific view of memory.&#10;Each master keeps track of the last value that it observed for each location in memory.&#10;Each store also keeps track of the masters that have observed that store" org.eventb.core.configuration="org.eventb.core.fwd" org.eventb.texttools.text_lastmodified="1427704155384" org.eventb.texttools.text_representation="machine AM3&#10;&#10;// In this refinement we introduce the notion of a master-specific view of memory.&#10;// Each master keeps track of the last value that it observed for each location in memory.&#10;// Each store also keeps track of the masters that have observed that store&#10;&#10;refines AM2 sees AC3&#10;&#10;variables issued observed lastobservedvalue observers&#10;&#10;invariants&#10;  @inv1 lastobservedvalue ∈ MASTER ⇸ (ADDR ⇸ VALUE)  // each master has its own view of memory: the last value the master observed for each address in memory&#10;  @inv2 observers ∈ MEMACCESS ⇸ ℙ(MASTER)  // each memory access maintains a set of the masters that have observed the memory access&#10;  @inv3 ∀i·i ∈ issued ∧ i ∈ MEMACCESS ⇒ i ∈ dom(observers)  // all issued memory accesses are tracked by observers&#10;  @inv4 ∀m·m ∈ MASTER ⇒ m ∈ dom(lastobservedvalue)  // all masters keep track of the last observed value&#10;&#10;events&#10;  event INITIALISATION&#10;    then&#10;      @act1 issued ≔ ∅&#10;      @act2 observed ≔ ∅&#10;      @act3 lastobservedvalue ≔ MASTER × {ADDR × {V0}} // initialise each master's view of memory to the default value V0&#10;      @act4 observers ≔ ∅&#10;  end&#10;&#10;  event IssueLoad // out of order&#10;  refines IssueLoad&#10;    any l&#10;    where&#10;      @grd1 l ∉ issued // not already issued&#10;      @grd2 l ∈ LOAD&#10;    then&#10;      @act1 issued ≔ issued ∪ {l} // add to the set of issued memory accesses&#10;      @act2 observers ≔ observers  {l ↦ ∅}  // establish the set, initially empty, that will hold the observers of the load&#10;  end&#10;&#10;  event IssueStore // out of order&#10;  refines IssueStore&#10;    any s&#10;    where&#10;      @grd1 s ∉ issued // not already issued&#10;      @grd2 s ∈ STORE&#10;    then&#10;      @act1 issued ≔ issued ∪ {s} // add to the set of issued memory accesses&#10;      @act2 observers ≔ observers  {s ↦ ∅}  // establish the set, initially empty, that will hold the observers of the store&#10;  end&#10;&#10;  event ObserveLoad refines ObserveLoad&#10;    any l m&#10;    where&#10;      @grd1 l ∈ issued // issued&#10;      @grd2 l ∈ LOAD&#10;      @grd3 m ∉ observers(l) // the master has not already observed this load&#10;    then&#10;      @act1 observed ≔ observed ∪ {l} // add to the set of observed memory accesses&#10;      @act2 observers(l) ≔ observers(l) ∪ {m} // add to set of masters that have observed this load&#10;  end&#10;&#10;  event ObserveStore refines ObserveStore&#10;    any s m&#10;    where&#10;      @grd1 s ∈ issued // issued&#10;      @grd2 s ∈ STORE&#10;      @grd3 m ∉ observers(s) // the master has not already observed this store&#10;    then&#10;      @act1 observed ≔ observed ∪ {s} // add to the set of observed memory accesses&#10;      @act2 lastobservedvalue(m) ≔ lastobservedvalue(m)  {address(s) ↦ value(s)}  // update the last observed value for that address for this master&#10;      @act3 observers(s) ≔ observers(s) ∪ {m} // add to set of masters that have observed this store&#10;  end&#10;end&#10;" version="5">
+<org.eventb.core.refinesMachine name="_eArhMNauEeS8PrcbdDoUAw" org.eventb.core.target="AM2"/>
+<org.eventb.core.seesContext name="_eArhMdauEeS8PrcbdDoUAw" org.eventb.core.target="AC3"/>
+<org.eventb.core.variable name="(" org.eventb.core.identifier="issued"/>
+<org.eventb.core.variable name="_w4qjgLBREeSftfcqDYm3Dx" org.eventb.core.identifier="observed"/>
+<org.eventb.core.variable name="_noQRoLBdEeS2YI9ZOZw9XQ" org.eventb.core.identifier="lastobservedvalue"/>
+<org.eventb.core.variable name="_W4GK0NFREeSEfrkbRWF-Qw" org.eventb.core.identifier="observers"/>
+<org.eventb.core.invariant name="_noQRobBdEeS2YI9ZOZw9XQ" org.eventb.core.comment="each master has its own view of memory: the last value the master observed for each address in memory" org.eventb.core.label="inv1" org.eventb.core.predicate="lastobservedvalue ∈ MASTER ⇸ (ADDR ⇸ VALUE)"/>
+<org.eventb.core.invariant name="_lW750bBeEeS2YI9ZOZw9XQ" org.eventb.core.comment="each memory access maintains a set of the masters that have observed the memory access" org.eventb.core.label="inv2" org.eventb.core.predicate="observers ∈ MEMACCESS ⇸ ℙ(MASTER)"/>
+<org.eventb.core.invariant name="__vlScLBnEeS2YI9ZOZw9XQ" org.eventb.core.comment="all issued memory accesses are tracked by observers" org.eventb.core.label="inv3" org.eventb.core.predicate="∀i·i ∈ issued ∧ i ∈ MEMACCESS ⇒ i ∈ dom(observers)"/>
+<org.eventb.core.invariant name="_HCNv4LZ5EeSa0vHX1GfqtA" org.eventb.core.comment="all masters keep track of the last observed value" org.eventb.core.label="inv4" org.eventb.core.predicate="∀m·m ∈ MASTER ⇒ m ∈ dom(lastobservedvalue)"/>
+<org.eventb.core.event name="_w4qjgLBREeSftfcqDYm3Dy" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="INITIALISATION">
+<org.eventb.core.action name="'" org.eventb.core.assignment="issued ≔ ∅" org.eventb.core.label="act1"/>
+<org.eventb.core.action name="(" org.eventb.core.assignment="observed ≔ ∅" org.eventb.core.label="act2"/>
+<org.eventb.core.action name="_noQ4sLBdEeS2YI9ZOZw9XQ" org.eventb.core.assignment="lastobservedvalue ≔ MASTER × {ADDR × {V0}}" org.eventb.core.comment="initialise each master's view of memory to the default value V0" org.eventb.core.label="act3"/>
+<org.eventb.core.action name="_lW8g4LBeEeS2YI9ZOZw9XQ" org.eventb.core.assignment="observers ≔ ∅" org.eventb.core.label="act4"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="_w4qjgLBREeSftfcqDYm3Dz" org.eventb.core.comment="out of order" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="IssueLoad">
+<org.eventb.core.refinesEvent name="_eAtWYNauEeS8PrcbdDoUAw" org.eventb.core.target="IssueLoad"/>
+<org.eventb.core.parameter name="_SEEIobEnEeSNbfxw2p-xdg" org.eventb.core.identifier="l"/>
+<org.eventb.core.guard name="_5G8aQ7BWEeSftfcqDYm3Dw" org.eventb.core.comment="not already issued" org.eventb.core.label="grd1" org.eventb.core.predicate="l ∉ issued"/>
+<org.eventb.core.guard name="_5G9BULBWEeSftfcqDYm3Dw" org.eventb.core.label="grd2" org.eventb.core.predicate="l ∈ LOAD"/>
+<org.eventb.core.action name="_5G9BUbBWEeSftfcqDYm3Dw" org.eventb.core.assignment="issued ≔ issued ∪ {l}" org.eventb.core.comment="add to the set of issued memory accesses" org.eventb.core.label="act1"/>
+<org.eventb.core.action name="_W4LqYNFREeSEfrkbRWF-Qw" org.eventb.core.assignment="observers ≔ observers  {l ↦ ∅}" org.eventb.core.comment="establish the set, initially empty, that will hold the observers of the load" org.eventb.core.label="act2"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="_w4qjgLBREeSftfcqDYm3D{" org.eventb.core.comment="out of order" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="IssueStore">
+<org.eventb.core.refinesEvent name="_eAt9cNauEeS8PrcbdDoUAw" org.eventb.core.target="IssueStore"/>
+<org.eventb.core.parameter name="_SEEvsbEnEeSNbfxw2p-xdg" org.eventb.core.identifier="s"/>
+<org.eventb.core.guard name="_5G9oYrBWEeSftfcqDYm3Dw" org.eventb.core.comment="not already issued" org.eventb.core.label="grd1" org.eventb.core.predicate="s ∉ issued"/>
+<org.eventb.core.guard name="_5G9oY7BWEeSftfcqDYm3Dw" org.eventb.core.label="grd2" org.eventb.core.predicate="s ∈ STORE"/>
+<org.eventb.core.action name="_5G9oZLBWEeSftfcqDYm3Dw" org.eventb.core.assignment="issued ≔ issued ∪ {s}" org.eventb.core.comment="add to the set of issued memory accesses" org.eventb.core.label="act1"/>
+<org.eventb.core.action name="_HHecIbBfEeS2YI9ZOZw9XQ" org.eventb.core.assignment="observers ≔ observers  {s ↦ ∅}" org.eventb.core.comment="establish the set, initially empty, that will hold the observers of the store" org.eventb.core.label="act2"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="_w4qjgLBREeSftfcqDYm3D|" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="ObserveLoad">
+<org.eventb.core.refinesEvent name="_eAvLkNauEeS8PrcbdDoUAw" org.eventb.core.target="ObserveLoad"/>
+<org.eventb.core.parameter name="_SEFWwLEnEeSNbfxw2p-xdg" org.eventb.core.identifier="l"/>
+<org.eventb.core.parameter name="_OetzIdFTEeSEfrkbRWF-Qw" org.eventb.core.identifier="m"/>
+<org.eventb.core.guard name="_F9cLkbBXEeSftfcqDYm3Dw" org.eventb.core.comment="issued" org.eventb.core.label="grd1" org.eventb.core.predicate="l ∈ issued"/>
+<org.eventb.core.guard name="_F9cLkrBXEeSftfcqDYm3Dw" org.eventb.core.label="grd2" org.eventb.core.predicate="l ∈ LOAD"/>
+<org.eventb.core.guard name="_OeuaMNFTEeSEfrkbRWF-Qw" org.eventb.core.comment="the master has not already observed this load" org.eventb.core.label="grd3" org.eventb.core.predicate="m ∉ observers(l)"/>
+<org.eventb.core.action name="_F9cyoLBXEeSftfcqDYm3Dw" org.eventb.core.assignment="observed ≔ observed ∪ {l}" org.eventb.core.comment="add to the set of observed memory accesses" org.eventb.core.label="act1"/>
+<org.eventb.core.action name="_W4P70NFREeSEfrkbRWF-Qw" org.eventb.core.assignment="observers(l) ≔ observers(l) ∪ {m}" org.eventb.core.comment="add to set of masters that have observed this load" org.eventb.core.label="act2"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="_w4qjgLBREeSftfcqDYm3D}" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="ObserveStore">
+<org.eventb.core.refinesEvent name="_eAwZsNauEeS8PrcbdDoUAw" org.eventb.core.target="ObserveStore"/>
+<org.eventb.core.parameter name="_SEFWwrEnEeSNbfxw2p-xdg" org.eventb.core.identifier="s"/>
+<org.eventb.core.parameter name="_XS7hkbEkEeSNbfxw2p-xdg" org.eventb.core.identifier="m"/>
+<org.eventb.core.guard name="_F9cypLBXEeSftfcqDYm3Dw" org.eventb.core.comment="issued" org.eventb.core.label="grd1" org.eventb.core.predicate="s ∈ issued"/>
+<org.eventb.core.guard name="_eAwZsdauEeS8PrcbdDoUAw" org.eventb.core.label="grd2" org.eventb.core.predicate="s ∈ STORE"/>
+<org.eventb.core.guard name="_F9dZsbBXEeSftfcqDYm3Dw" org.eventb.core.comment="the master has not already observed this store" org.eventb.core.label="grd3" org.eventb.core.predicate="m ∉ observers(s)"/>
+<org.eventb.core.action name="_F9dZsrBXEeSftfcqDYm3Dw" org.eventb.core.assignment="observed ≔ observed ∪ {s}" org.eventb.core.comment="add to the set of observed memory accesses" org.eventb.core.label="act1"/>
+<org.eventb.core.action name="_Nl7GQLBfEeS2YI9ZOZw9XQ" org.eventb.core.assignment="lastobservedvalue(m) ≔ lastobservedvalue(m)  {address(s) ↦ value(s)}" org.eventb.core.comment="update the last observed value for that address for this master" org.eventb.core.label="act2"/>
+<org.eventb.core.action name="_iaHt8LBfEeS2YI9ZOZw9XQ" org.eventb.core.assignment="observers(s) ≔ observers(s) ∪ {m}" org.eventb.core.comment="add to set of masters that have observed this store" org.eventb.core.label="act3"/>
+</org.eventb.core.event>
+</org.eventb.core.machineFile>

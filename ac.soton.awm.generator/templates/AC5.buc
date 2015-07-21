@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.contextFile org.eventb.core.configuration="org.eventb.core.fwd" org.eventb.texttools.text_lastmodified="1425633169810" org.eventb.texttools.text_representation="context AC5 extends AC4&#10;&#10;sets REG&#10;&#10;constants register&#10;&#10;axioms&#10;  @axm1 register ∈ LOAD → REG  // each load has a target register&#10;end&#10;" version="3">
+<org.eventb.core.extendsContext name="_lGi1wMPYEeSCYfaKX74CSw" org.eventb.core.target="AC4"/>
+<org.eventb.core.carrierSet name="__CW9MLs1EeSbduHSoMvCew" org.eventb.core.identifier="REG"/>
+<org.eventb.core.constant name="__CW9Mbs1EeSbduHSoMvCew" org.eventb.core.identifier="register"/>
+<org.eventb.core.axiom name="__CXkQLs1EeSbduHSoMvCew" org.eventb.core.comment="each load has a target register" org.eventb.core.label="axm1" org.eventb.core.predicate="register ∈ LOAD → REG"/>
+</org.eventb.core.contextFile>
